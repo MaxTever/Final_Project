@@ -11,6 +11,12 @@ services:
       - backend
     ports: 
       - '80:80'
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/"]
+      interval: 1m30s
+      timeout: 30s
+      retries: 3
+      start_period: 30s
   backend:
     image: taski-back-multi:latest
     build:
@@ -23,3 +29,9 @@ services:
     - "8000:8000"
     volumes:
         - ./backend:/app
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000"]
+      interval: 1m30s
+      timeout: 30s
+      retries: 3
+      start_period: 30s
