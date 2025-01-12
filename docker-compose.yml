@@ -1,0 +1,25 @@
+
+services:
+  frontend: 
+    image: taski-front-multi:latest
+    build: 
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: taski-front
+    restart: always
+    depends_on:
+      - backend
+    ports: 
+      - '80:80'
+  backend:
+    image: multi-back-taski:latest
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: taski-back
+    command: sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    restart: always
+    ports: 
+    - "8000:8000"
+    volumes:
+        - ./backend:/app
