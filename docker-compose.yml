@@ -12,12 +12,12 @@ services:
     ports: 
       - '80:80'
   backend:
-    image: multi-back-taski:latest
+    image: taski-back-multi:latest
     build:
       context: ./backend
       dockerfile: Dockerfile
     container_name: taski-back
-    command: sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    command: sh -c "python manage.py runserver 0.0.0.0:8000 && python manage.py migrate"
     restart: always
     ports: 
     - "8000:8000"
