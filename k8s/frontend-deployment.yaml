@@ -15,5 +15,6 @@ spec:
       containers:
         - name: frontend
           image: maxtever/taski-front-multi:latest
+          # imagePullPolicy: Never
           ports:
             - containerPort: 80
